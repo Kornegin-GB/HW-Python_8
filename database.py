@@ -8,21 +8,21 @@ cursor.execute(f""" CREATE TABLE IF NOT EXISTS {TABLE_NAME}(
     id      INTEGER      PRIMARY KEY AUTOINCREMENT,
     name    STRING (50),
     surname STRING (50),
-    post    STRING (100) 
+    phone    STRING (100) 
 )
 """)
 
 
 def insert_one_entry_db(data):  # Добавление одной записи
     cursor.execute(
-        f"INSERT INTO {TABLE_NAME} (name, surname, post) VALUES(?, ?, ?);", data
+        f"INSERT INTO {TABLE_NAME} (name, surname, phone) VALUES(?, ?, ?);", data
     )
     connect.commit()
 
 
 def insert_db(data):  # Добавление нескольких записей
     try:
-        query = f"INSERT INTO {TABLE_NAME} (name, surname, post) VALUES(?, ?, ?);"
+        query = f"INSERT INTO {TABLE_NAME} (name, surname, phone) VALUES(?, ?, ?);"
         if len(data) > 2:
             cursor.executemany(query, data)
         else:
@@ -38,13 +38,13 @@ def delete_insert_db(data):  # Добавление нескольких зап�
         UPDATE SQLITE_SEQUENCE SET seq = 0 WHERE name = '{TABLE_NAME}';
         """
     )
-    query = f"INSERT INTO {TABLE_NAME} (name, surname, post) VALUES(?, ?, ?);"
+    query = f"INSERT INTO {TABLE_NAME} (name, surname, phone) VALUES(?, ?, ?);"
     cursor.executemany(query, data)
     connect.commit()
 
 
 def update_one_entry_db(data, num):  # Заменить одну запись
-    update_query = f""" UPDATE {TABLE_NAME} set name = ?, surname = ?, post = ? WHERE id = ? """
+    update_query = f""" UPDATE {TABLE_NAME} set name = ?, surname = ?, phone = ? WHERE id = ? """
     data_query = [data[0], data[1], data[2], num]
     cursor.execute(update_query, data_query)
     connect.commit()

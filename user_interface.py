@@ -67,8 +67,8 @@ def entry_record_data():
     """ Ввод данных записи """
     name = input("Введите имя: ")
     surname = input("Введите фамилию: ")
-    post = input("Введите должность: ")
-    record = [name, surname, post]
+    phone = input("Введите телефон: ")
+    record = [name, surname, phone]
     return record
 
 
